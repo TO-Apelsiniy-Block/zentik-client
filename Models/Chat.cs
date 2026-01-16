@@ -16,8 +16,9 @@ namespace Zentik.Models
         public int UnreadCounter { get; set; }
 
         // Конструктор для теста, потом убрать
-        public Chat(string contactName, string lastMessage, int unreadCounter) 
+        public Chat(int id, string contactName, string lastMessage, int unreadCounter) 
         {
+            Id = id;
             ContactName = contactName;
             LastMessage = lastMessage;
             Avatar = Image.FromFile(".\\..\\..\\..\\pictures\\defoltAvatar.jpg");
@@ -26,8 +27,9 @@ namespace Zentik.Models
         }
 
         // Основной конструктор
-        public Chat(string contactName, string lastMessage, Image avatar, DateTime lastMessageTime, int unreadCounter) 
+        public Chat(int id, string contactName, string lastMessage, Image avatar, DateTime lastMessageTime, int unreadCounter) 
         {
+            Id = id;
             ContactName = contactName;
             LastMessage = lastMessage;
             Avatar = avatar;

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Zentik.Models
 {
@@ -27,30 +28,34 @@ namespace Zentik.Models
         {
             set
             {
+                this.unreadСounter.Visible = true;
                 if (value == 0)
                     this.unreadСounter.Visible = false;
                 else if (value > 99)
+
                     this.unreadСounter.Text = "♾️"; // ∞
                 else
                     this.unreadСounter.Text = Convert.ToString(ChatData.UnreadCounter);
             }
         }
-
-        public event EventHandler<string> NewMessage;
-        public event EventHandler<string> ;
-
+        public string LastMessage
+        {
+            set
+            {
+                massage.Text = value;
+            }
+        }
 
         // Основной конструктор
         public ChatListItem(Chat chat)
         {
             InitializeComponent();
             this.ChatData = chat; // сохраняем ссылку, на какой чат ссылается этот UI
-
+            this.Name = chat.Id.ToString();
             this.name.Text = chat.ContactName;
-            this.massage.Text = chat.LastMessage;
             this.avatar.Image = chat.Avatar;
+            LastMessage = chat.LastMessage;
             UnreadCounter = chat.UnreadCounter;
-            
         }
 
         private void ChatListItem_Load(object sender, EventArgs e)

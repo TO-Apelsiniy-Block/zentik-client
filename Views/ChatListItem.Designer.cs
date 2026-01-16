@@ -47,6 +47,7 @@
             // 
             // name
             // 
+            name.AutoEllipsis = true;
             name.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             name.ForeColor = Color.White;
             name.Location = new Point(74, 12);
@@ -56,11 +57,12 @@
             // 
             // massage
             // 
+            massage.AutoEllipsis = true;
             massage.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             massage.ForeColor = Color.White;
             massage.Location = new Point(74, 40);
             massage.Name = "massage";
-            massage.Size = new Size(135, 23);
+            massage.Size = new Size(145, 23);
             massage.TabIndex = 2;
             // 
             // unreadСounter

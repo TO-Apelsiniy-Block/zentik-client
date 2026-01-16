@@ -33,16 +33,15 @@ namespace Zentik.Views
             // чтобы обозначить flowMessages границы для нормального выравнивания
             flowMessages.Controls.Add(new Panel()
             {
-                Width = flowMessages.ClientSize.Width,
+                Width = flowMessages.ClientSize.Width - 6,
                 Height = 0
             }); 
             
             // ресайз при изменении размеров окна
             flowMessages.SizeChanged += (s, e) =>
             {
-                flowMessages.Controls[0].Width = flowMessages.ClientSize.Width;
+                flowMessages.Controls[0].Width = flowMessages.ClientSize.Width - 6;
             };
-            Console.WriteLine(flowMessages.MaximumSize);
         }
 
         internal void DisplayMessage(Models.Message message)
@@ -50,18 +49,17 @@ namespace Zentik.Views
             var bubble = new MessageBubble(message);
             flowMessages.Controls.Add(bubble);
             flowMessages.ScrollControlIntoView(bubble);
-            Console.WriteLine(flowMessages.Width);
-            Console.WriteLine(flowMessages.Controls[0].Width);
         }
 
         // Очистка чата
         public void ClearMessages()
         {
             flowMessages.Controls.Clear();
+
             // чтобы обозначить flowMessages границы для нормального выравнивания
             flowMessages.Controls.Add(new Panel()
             {
-                Width = flowMessages.ClientSize.Width,
+                Width = flowMessages.ClientSize.Width - 6,
                 Height = 0
             });
         }

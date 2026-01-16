@@ -86,12 +86,13 @@
             // 
             // headerName
             // 
+            headerName.BackColor = Color.FromArgb(28, 39, 51);
             headerName.Dock = DockStyle.Left;
             headerName.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
             headerName.ForeColor = Color.White;
             headerName.Location = new Point(39, 0);
             headerName.Name = "headerName";
-            headerName.Size = new Size(777, 39);
+            headerName.Size = new Size(755, 39);
             headerName.TabIndex = 1;
             headerName.Text = "Иван Алексеевич";
             headerName.TextAlign = ContentAlignment.MiddleLeft;
@@ -108,11 +109,12 @@
             // 
             // flowMessages
             // 
+            flowMessages.AutoScroll = true;
             flowMessages.AutoSize = true;
             flowMessages.Dock = DockStyle.Fill;
             flowMessages.FlowDirection = FlowDirection.TopDown;
             flowMessages.Location = new Point(3, 48);
-            flowMessages.MinimumSize = new Size(400, 0);
+            flowMessages.MinimumSize = new Size(394, 0);
             flowMessages.Name = "flowMessages";
             flowMessages.Size = new Size(794, 589);
             flowMessages.TabIndex = 1;

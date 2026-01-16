@@ -20,18 +20,6 @@ namespace Zentik.Models
         {
             get
             {
-                var now = DateTime.Now;
-                var diff = now - Timestamp;
-
-                if (diff.TotalSeconds < 60)
-                    return "только что";
-                if (diff.TotalMinutes < 60)
-                    return $"{(int)diff.TotalMinutes} мин назад";
-                if (Timestamp.Date == now.Date)
-                    return Timestamp.ToString("HH:mm");
-                if (Timestamp.Date == now.Date.AddDays(-1))
-                    return $"вчера в {Timestamp:HH:mm}";
-
                 return Timestamp.ToString("dd.MM.yy HH:mm");
             }
         }

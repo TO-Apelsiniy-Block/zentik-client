@@ -1,14 +1,17 @@
 using System.Windows.Forms;
 using Zentik.Controllers;
 using Zentik.Models;
+using Zentik.Server;
 using Zentik.Views;
 
 namespace Zentik
 {
     public partial class MainWindow : Form
     {
-        private ChatsManager _chatsManager;     // контроллер списка чатов
-        private ChatController _currentChatController;  // контроллер чата
+        private ChatsManager _chatsManager;
+        private ChatController _currentChatController;
+        private SseClient _sseClient;   
+        private RestClient _restClient;
 
         public MainWindow()
         {
@@ -23,7 +26,17 @@ namespace Zentik
 
         private void InitializeControllers()
         {
-            _chatsManager = new ChatsManager(flowLayoutPanelChats, currentChatAndInfo.Panel1);
+            _sseClient = new SseClient();
+            _restClient = new RestClient();
+            _chatsManager = ChatsManager.Create(
+                flowLayoutPanelChats, 
+                currentChatAndInfo.Panel1, 
+                _restClient)
+                .GetAwaiter().GetResult();
+            _sseClient.OnNewMessage += (s, e) => _chatsManager.ReceiveMessage(e);
+            _sseClient.OnNewChat += (s, e) => _chatsManager.ReceiveChat(e);
+
+            _ = _sseClient.StartAsync();
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
