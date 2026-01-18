@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zentik.Models;
+using Zentik.Exceptions;
 
 namespace Zentik.Server
 {
@@ -32,6 +33,32 @@ namespace Zentik.Server
                 new Chat(3, "Саид3", "Дедлайн завтра!", 100),
                 new Chat(4, "Саид4", "Дедлайн завтра?", 0),
             };
+        }
+
+        
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            if (email == "Kostya")
+            {
+                throw new NotFoundException();
+            }
+            var a = Random.Shared.Next(100, 10000);
+            return new User() { Email = email, UserId = a, Username = $"SearchUser {a}" };
+        }
+
+        public async Task<Chat> CreateChatAsync(int userId)
+        {
+            // Временная реализация
+            if (userId % 3 == 0)
+            {
+                throw new AlreadyExistsException();
+            }
+            return new Chat(userId, $"Username {userId}", "Новый чат", 0);
+        }
+        public async Task<int> GetChatIdAsync(int userId)
+        {
+            // Временная реализация
+            return Random.Shared.Next(1, 4);
         }
     }
 }

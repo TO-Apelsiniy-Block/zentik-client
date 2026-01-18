@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             chatsListAndСurrentChat = new SplitContainer();
             flowLayoutPanelChats = new FlowLayoutPanel();
+            emailSearchTextBox = new TextBox();
+            emailSearchLabel = new Label();
             currentChatAndInfo = new SplitContainer();
             ((System.ComponentModel.ISupportInitialize)chatsListAndСurrentChat).BeginInit();
             chatsListAndСurrentChat.Panel1.SuspendLayout();
@@ -53,6 +55,8 @@
             // chatsListAndСurrentChat.Panel1
             // 
             chatsListAndСurrentChat.Panel1.Controls.Add(flowLayoutPanelChats);
+            chatsListAndСurrentChat.Panel1.Controls.Add(emailSearchTextBox);
+            chatsListAndСurrentChat.Panel1.Controls.Add(emailSearchLabel);
             // 
             // chatsListAndСurrentChat.Panel2
             // 
@@ -69,11 +73,35 @@
             flowLayoutPanelChats.AutoScroll = true;
             flowLayoutPanelChats.Dock = DockStyle.Fill;
             flowLayoutPanelChats.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanelChats.Location = new Point(0, 0);
+            flowLayoutPanelChats.Location = new Point(0, 46);
             flowLayoutPanelChats.Name = "flowLayoutPanelChats";
-            flowLayoutPanelChats.Size = new Size(278, 709);
-            flowLayoutPanelChats.TabIndex = 0;
+            flowLayoutPanelChats.Size = new Size(278, 663);
+            flowLayoutPanelChats.TabIndex = 9;
             flowLayoutPanelChats.WrapContents = false;
+            // 
+            // emailSearchTextBox
+            // 
+            emailSearchTextBox.BackColor = Color.FromArgb(30, 41, 53);
+            emailSearchTextBox.BorderStyle = BorderStyle.FixedSingle;
+            emailSearchTextBox.Dock = DockStyle.Top;
+            emailSearchTextBox.Font = new Font("Segoe UI", 10F);
+            emailSearchTextBox.ForeColor = Color.White;
+            emailSearchTextBox.Location = new Point(0, 21);
+            emailSearchTextBox.Name = "emailSearchTextBox";
+            emailSearchTextBox.Size = new Size(278, 25);
+            emailSearchTextBox.TabIndex = 7;
+            // 
+            // emailSearchLabel
+            // 
+            emailSearchLabel.Dock = DockStyle.Top;
+            emailSearchLabel.Font = new Font("Segoe UI", 10F);
+            emailSearchLabel.ForeColor = Color.White;
+            emailSearchLabel.Location = new Point(0, 0);
+            emailSearchLabel.Margin = new Padding(3);
+            emailSearchLabel.Name = "emailSearchLabel";
+            emailSearchLabel.Size = new Size(278, 21);
+            emailSearchLabel.TabIndex = 8;
+            emailSearchLabel.Text = "Поиск пользователя по email";
             // 
             // currentChatAndInfo
             // 
@@ -102,6 +130,7 @@
             Name = "MainWindow";
             Text = "Zentik";
             chatsListAndСurrentChat.Panel1.ResumeLayout(false);
+            chatsListAndСurrentChat.Panel1.PerformLayout();
             chatsListAndСurrentChat.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)chatsListAndСurrentChat).EndInit();
             chatsListAndСurrentChat.ResumeLayout(false);
@@ -114,6 +143,8 @@
 
         private SplitContainer chatsListAndСurrentChat;
         private SplitContainer currentChatAndInfo;
+        private TextBox emailSearchTextBox;
+        private Label emailSearchLabel;
         private FlowLayoutPanel flowLayoutPanelChats;
     }
 }

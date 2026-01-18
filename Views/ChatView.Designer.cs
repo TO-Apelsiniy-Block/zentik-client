@@ -140,6 +140,7 @@
             txtMessage.ForeColor = Color.White;
             txtMessage.Location = new Point(54, 0);
             txtMessage.Name = "txtMessage";
+            txtMessage.ScrollBars = RichTextBoxScrollBars.Vertical;
             txtMessage.Size = new Size(686, 54);
             txtMessage.TabIndex = 3;
             txtMessage.Text = "";

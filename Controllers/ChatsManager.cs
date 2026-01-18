@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Zentik.Models;
-using Zentik.Views;
 using Zentik.Server;
+using Zentik.Views;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Zentik.Controllers
@@ -47,14 +48,7 @@ namespace Zentik.Controllers
             // Создание для каждого чата UI
             foreach (var chat in _chats)
             {
-                ChatListItem chatListItem = new ChatListItem(chat);
-
-                // Подписка на клик (выбор чата в списке чатов)
-                chatListItem.Click += (s, e) => SelectChatItem(chatListItem);
-                foreach (Control child in chatListItem.Controls)
-                {
-                    child.Click += (s, e) => SelectChatItem(chatListItem);
-                }
+                ChatListItem chatListItem = CreateChatListItem(chat);
                 _chatListPanel.Controls.Add(chatListItem);
             }
         }
@@ -67,7 +61,6 @@ namespace Zentik.Controllers
 
             chatListItem.IsSelected = true;
             _selectedItem = chatListItem;
-
 
             // Открываем чат
             OpenChat(chatListItem.ChatData);
@@ -88,13 +81,9 @@ namespace Zentik.Controllers
             }
 
             var chatView = new ChatView();
-            chatView.Dock = DockStyle.Fill;
 
             _currentChatController = new ChatController(chat, chatView, this, _restClient);
-
             _chatContainer.Controls.Add(chatView);
-
-            _currentChatController.LoadHistory();
         }
 
         public void ReceiveMessage(Models.Message message)
@@ -124,33 +113,45 @@ namespace Zentik.Controllers
         {
             // Обновляет модель и представление ChatListItem при ОТПРАВКЕ нового сообщения
             // Предполагается что количество непрочитанных сообщений равно нулю в текущем чате
-            ChatListItem chatView = _chatListPanel.Controls
+            ChatListItem chatListItem = _chatListPanel.Controls
                 .Cast<ChatListItem>()
                 .First(c => c.ChatData.Id == message.ChatId);
-            
-            chatView.ChatData.LastMessage = message.Text;
-            chatView.ChatData.LastMessageTime = message.Timestamp;
-            chatView.LastMessage = message.Text;
 
-            _chatListPanel.Controls.SetChildIndex(chatView, 0);
+            chatListItem.ChatData.LastMessage = message.Text;
+            chatListItem.ChatData.LastMessageTime = message.Timestamp;
+            chatListItem.LastMessage = message.Text;
+
+            _chatListPanel.Controls.SetChildIndex(chatListItem, 0);
         }
 
-        public void ReceiveChat(Chat chat)
+        // Создание и вставка чата
+        public void CreateChat(Chat chat)
         {
-            // Получение нового чата 
+            var chatListItem = CreateChatListItem(chat);
+            _chatListPanel.Controls.Add(chatListItem);
+            _chatListPanel.Controls.SetChildIndex(chatListItem, 0);
+        }
 
-            _chats.Add(chat);
+        // Выделение чата через chatId
+        public void SelectChatByChatId(int chatId)
+        {
+            ChatListItem chatListItem = _chatListPanel.Controls
+                .Cast<ChatListItem>()
+                .First(c => c.ChatData.Id == chatId);
+            SelectChatItem(chatListItem);
+        }
 
-            // TODO вынести в отдельную функцию
+        private ChatListItem CreateChatListItem(Chat chat)
+        {
             ChatListItem chatListItem = new ChatListItem(chat);
 
-            // Подписка на клик (выбор чата в списке чатов)
+            // TODO Подписка на клик (выбор чата в списке чатов)
             chatListItem.Click += (s, e) => SelectChatItem(chatListItem);
             foreach (Control child in chatListItem.Controls)
             {
                 child.Click += (s, e) => SelectChatItem(chatListItem);
             }
-            _chatListPanel.Controls.Add(chatListItem);
+            return chatListItem;
         }
     }
 }

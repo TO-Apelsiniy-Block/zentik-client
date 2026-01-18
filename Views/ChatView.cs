@@ -19,6 +19,7 @@ namespace Zentik.Views
         public ChatView()
         {
             InitializeComponent();
+            Dock = DockStyle.Fill;
 
             btnSend.Click += (s, e) => OnSendMessage();
             txtMessage.KeyDown += (s, e) =>
