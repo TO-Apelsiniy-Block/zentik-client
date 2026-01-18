@@ -10,6 +10,8 @@ namespace Zentik.Server
 {
     internal class RestClient
     {
+        private string _authToken;
+
         public async Task<Models.Message> CreateMessageAsync(string text, int chatId)
         {
             return new Models.Message(-1, chatId, text, DateTime.Now);
@@ -59,6 +61,22 @@ namespace Zentik.Server
         {
             // Временная реализация
             return Random.Shared.Next(1, 4);
+        }
+
+        public async Task SendVerificationCodeAsync(string email)
+        {
+
+        }
+
+        public async Task<string> RegisterAsync(string username, string email, string code, string password)
+        {
+            return "11";
+        }
+
+        public async Task<string> LoginAsync(string email, string code, string password)
+        {
+
+            return "11";
         }
     }
 }

@@ -13,25 +13,23 @@ namespace Zentik
         private EmailSearchController _emailSearchController;
         private SseClient _sseClient;
         private RestClient _restClient;
+        private readonly string _authToken;
 
-        public MainWindow()
+        internal MainWindow(string token, RestClient restClient)
         {
             InitializeComponent();
-            InitializeControllers();
+            InitializeControllers(restClient);
 
-            var qwe = chatsListAndСurrentChat.Panel1.Controls.Count;
-            Console.WriteLine(qwe);
+            _authToken = token;
             // На минимум вторая панель не нужна
             // Чтобы не менять структуру отключена
-            currentChatAndInfo.Panel2.BackColor = Color.Red;
             currentChatAndInfo.Panel2Collapsed = true;
-
         }
 
-        private void InitializeControllers()
+        private void InitializeControllers(RestClient restClient)
         {
             _sseClient = new SseClient();
-            _restClient = new RestClient();
+            _restClient = restClient;
             _chatsManager = ChatsManager.Create(
                 flowLayoutPanelChats,
                 currentChatAndInfo.Panel1,
@@ -43,6 +41,23 @@ namespace Zentik
             _emailSearchController = new EmailSearchController(new EmailSearchView(emailSearchTextBox), _restClient, _chatsManager);
 
             _ = _sseClient.StartAsync();
+        }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Выйти из аккаунта?", "Выход", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    File.Delete("AuthToken.txt");
+
+                    Application.Restart();
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка при выходе", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
@@ -71,6 +86,11 @@ namespace Zentik
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UnloginAndSearch_Paint(object sender, PaintEventArgs e)
         {
 
         }

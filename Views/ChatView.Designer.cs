@@ -50,6 +50,8 @@
             attachButton.BackgroundImage = Properties.Resources.attachButtonPic;
             attachButton.BackgroundImageLayout = ImageLayout.Zoom;
             attachButton.Dock = DockStyle.Left;
+            attachButton.FlatAppearance.BorderSize = 0;
+            attachButton.FlatStyle = FlatStyle.Flat;
             attachButton.Location = new Point(0, 0);
             attachButton.Name = "attachButton";
             attachButton.Size = new Size(54, 54);
@@ -94,7 +96,6 @@
             headerName.Name = "headerName";
             headerName.Size = new Size(755, 39);
             headerName.TabIndex = 1;
-            headerName.Text = "Иван Алексеевич";
             headerName.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // headerAvatar
@@ -149,8 +150,10 @@
             // 
             btnSend.BackColor = Color.FromArgb(30, 41, 53);
             btnSend.BackgroundImage = Properties.Resources.sendButtonPic;
-            btnSend.BackgroundImageLayout = ImageLayout.Zoom;
+            btnSend.BackgroundImageLayout = ImageLayout.Stretch;
             btnSend.Dock = DockStyle.Right;
+            btnSend.FlatAppearance.BorderSize = 0;
+            btnSend.FlatStyle = FlatStyle.Flat;
             btnSend.Location = new Point(740, 0);
             btnSend.Name = "btnSend";
             btnSend.Size = new Size(54, 54);

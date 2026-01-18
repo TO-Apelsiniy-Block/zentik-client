@@ -73,9 +73,29 @@ namespace Zentik.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Black_Logo {
+            get {
+                object obj = ResourceManager.GetObject("Black-Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap sendButtonPic {
             get {
                 object obj = ResourceManager.GetObject("sendButtonPic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UnLoginBtnPic {
+            get {
+                object obj = ResourceManager.GetObject("UnLoginBtnPic", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
