@@ -8,10 +8,8 @@ using Zentik.Exceptions;
 
 namespace Zentik.Server
 {
-    internal class RestClient
+    internal class RestClient (string _authToken)
     {
-        private string _authToken;
-
         public async Task<Models.Message> CreateMessageAsync(string text, int chatId)
         {
             return new Models.Message(-1, chatId, text, DateTime.Now);

@@ -9,7 +9,7 @@ using static System.Net.WebRequestMethods;
 
 namespace Zentik.Server
 {
-    internal class SseClient
+    internal class SseClient(string _authToken)
     {
         public event EventHandler<Models.Message> OnNewMessage;
         public event EventHandler<Chat> OnNewChat;

@@ -143,7 +143,7 @@ namespace Zentik.Controllers
 
         private ChatListItem CreateChatListItem(Chat chat)
         {
-            ChatListItem chatListItem = new ChatListItem(chat);
+            ChatListItem chatListItem = new(chat);
 
             // TODO Подписка на клик (выбор чата в списке чатов)
             chatListItem.Click += (s, e) => SelectChatItem(chatListItem);

@@ -28,7 +28,7 @@ namespace Zentik
 
         private void InitializeControllers(RestClient restClient)
         {
-            _sseClient = new SseClient();
+            _sseClient = new SseClient(_authToken);
             _restClient = restClient;
             _chatsManager = ChatsManager.Create(
                 flowLayoutPanelChats,

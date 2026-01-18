@@ -11,7 +11,7 @@ namespace Zentik
     {
         private const string TOKEN_FILE = "AuthToken.txt";
         private string _authToken;
-        private readonly RestClient _restClient = new();
+        private RestClient _restClient = new("");
 
         public void Start()
         {
@@ -56,6 +56,7 @@ namespace Zentik
 
         private void StartMainForm()
         {
+            _restClient = new RestClient(_authToken);
             var mainForm = new MainWindow(_authToken, _restClient);
             Application.Run(mainForm);
         }
