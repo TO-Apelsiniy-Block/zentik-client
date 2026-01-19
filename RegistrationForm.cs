@@ -27,8 +27,6 @@ namespace Zentik
         private async void SendVerCodeButton_Click(object sender, EventArgs e)
         {
             await _restClient.SendVerificationCodeAsync(EmailTextBox.Text);
-            MessageBox.Show("Это ты");
-
         }
 
         private void ToAuthForm_Click(object sender, EventArgs e)
