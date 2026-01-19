@@ -46,7 +46,7 @@
             // 
             // attachButton
             // 
-            attachButton.BackColor = Color.FromArgb(30, 41, 53);
+            attachButton.BackColor = Color.FromArgb(27, 49, 73);
             attachButton.BackgroundImage = Properties.Resources.attachButtonPic;
             attachButton.BackgroundImageLayout = ImageLayout.Zoom;
             attachButton.Dock = DockStyle.Left;
@@ -88,8 +88,8 @@
             // 
             // headerName
             // 
-            headerName.BackColor = Color.FromArgb(28, 39, 51);
-            headerName.Dock = DockStyle.Left;
+            headerName.BackColor = Color.FromArgb(26, 37, 49);
+            headerName.Dock = DockStyle.Fill;
             headerName.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
             headerName.ForeColor = Color.White;
             headerName.Location = new Point(39, 0);
@@ -112,6 +112,7 @@
             // 
             flowMessages.AutoScroll = true;
             flowMessages.AutoSize = true;
+            flowMessages.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             flowMessages.Dock = DockStyle.Fill;
             flowMessages.FlowDirection = FlowDirection.TopDown;
             flowMessages.Location = new Point(3, 48);
@@ -148,8 +149,8 @@
             // 
             // btnSend
             // 
-            btnSend.BackColor = Color.FromArgb(30, 41, 53);
-            btnSend.BackgroundImage = Properties.Resources.sendButtonPic;
+            btnSend.BackColor = Color.FromArgb(27, 49, 73);
+            btnSend.BackgroundImage = Properties.Resources.SendBtnPic;
             btnSend.BackgroundImageLayout = ImageLayout.Stretch;
             btnSend.Dock = DockStyle.Right;
             btnSend.FlatAppearance.BorderSize = 0;

@@ -35,13 +35,13 @@ namespace Zentik.Views
             flowMessages.Controls.Add(new Panel()
             {
                 Width = flowMessages.ClientSize.Width - 6,
-                Height = 0
+                Height = 0,
             }); 
             
             // ресайз при изменении размеров окна
-            flowMessages.SizeChanged += (s, e) =>
+            Resize += (s, e) =>
             {
-                flowMessages.Controls[0].Width = flowMessages.ClientSize.Width - 6;
+                flowMessages.Controls[0].Width = flowMessages.Width - 26;
             };
         }
 

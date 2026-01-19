@@ -152,6 +152,7 @@
             ClientSize = new Size(1184, 711);
             Controls.Add(chatsListAndСurrentChat);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MinimumSize = new Size(750, 400);
             Name = "MainWindow";
             Text = "Zentik";
             chatsListAndСurrentChat.Panel1.ResumeLayout(false);

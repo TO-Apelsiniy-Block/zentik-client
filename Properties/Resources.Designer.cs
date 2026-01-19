@@ -93,9 +93,9 @@ namespace Zentik.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sendButtonPic {
+        internal static System.Drawing.Bitmap SendBtnPic {
             get {
-                object obj = ResourceManager.GetObject("sendButtonPic", resourceCulture);
+                object obj = ResourceManager.GetObject("SendBtnPic", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
