@@ -22,13 +22,13 @@ namespace Zentik.Controllers
 
 
         // Асинхронный конструткор
-        public static async Task<ChatsManager> Create(
+        public static ChatsManager Create(
             FlowLayoutPanel chatListPanel, 
             Panel chatContainer, 
             RestClient restClient)
         {
             var chatsManager = new ChatsManager(chatListPanel, chatContainer, restClient);
-            await chatsManager.LoadChats();
+            chatsManager.LoadChats();
             return chatsManager;
         }
 
@@ -41,16 +41,28 @@ namespace Zentik.Controllers
         }
 
         // Загрузка чатов
-        private async Task LoadChats() // TODO баги из-за async
+        private void LoadChats()
         {
-            _chats.AddRange(await _restClient.GetChatsAsync());
+
+            Task.Run(async () =>
+            {
+                var chats = await _restClient.GetChatsAsync();
+
+                // вернемся в UI-поток
+                _chatListPanel.Invoke(() =>
+                {
+                    _chats.AddRange(chats);
+                    foreach (var chat in _chats)
+                    {
+                        ChatListItem chatListItem = CreateChatListItem(chat);
+                        _chatListPanel.Controls.Add(chatListItem);
+                    }
+                });
+            });
+
 
             // Создание для каждого чата UI
-            foreach (var chat in _chats)
-            {
-                ChatListItem chatListItem = CreateChatListItem(chat);
-                _chatListPanel.Controls.Add(chatListItem);
-            }
+
         }
 
         // При выделении чата

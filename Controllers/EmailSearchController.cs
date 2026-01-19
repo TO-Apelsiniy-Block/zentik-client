@@ -49,6 +49,10 @@ namespace Zentik.Controllers
             {
                 _chatsManager.SelectChatByChatId(await _restClient.GetChatIdAsync(user.UserId));
             }
+            catch (SelfChatException)
+            {
+                MessageBox.Show("Это ты");
+            }
         }
     }
 }

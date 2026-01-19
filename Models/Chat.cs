@@ -21,7 +21,7 @@ namespace Zentik.Models
             Id = id;
             ContactName = contactName;
             LastMessage = lastMessage;
-            Avatar = Image.FromFile(".\\..\\..\\..\\pictures\\defoltAvatar.jpg");
+            Avatar = Properties.Resources.defoltAvatar;
             LastMessageTime = DateTime.Now;
             UnreadCounter = unreadCounter;
         }

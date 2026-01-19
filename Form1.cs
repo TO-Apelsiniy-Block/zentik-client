@@ -13,30 +13,47 @@ namespace Zentik
         private EmailSearchController _emailSearchController;
         private SseClient _sseClient;
         private RestClient _restClient;
-        private readonly string _authToken;
+
+        private SynchronizationContext _ui;
 
         internal MainWindow(string token, RestClient restClient)
         {
             InitializeComponent();
-            InitializeControllers(restClient);
+            InitializeControllers(restClient, token);
 
-            _authToken = token;
             // На минимум вторая панель не нужна
             // Чтобы не менять структуру отключена
             currentChatAndInfo.Panel2Collapsed = true;
+
         }
 
-        private void InitializeControllers(RestClient restClient)
+        private void InitializeControllers(RestClient restClient, string token)
         {
-            _sseClient = new SseClient(_authToken);
+            _sseClient = new SseClient(token);
             _restClient = restClient;
             _chatsManager = ChatsManager.Create(
                 flowLayoutPanelChats,
                 currentChatAndInfo.Panel1,
-                _restClient)
-                .GetAwaiter().GetResult();
-            _sseClient.OnNewMessage += (s, e) => _chatsManager.ReceiveMessage(e);
-            _sseClient.OnNewChat += (s, e) => _chatsManager.CreateChat(e);
+                _restClient);
+
+            // _sseClient.OnNewMessage += _chatsManager.ReceiveMessage;
+            // _sseClient.OnNewChat += _chatsManager.CreateChat;
+            // Иначе проблема с тем, что объекты создаются не в UI потоке
+            _ui = SynchronizationContext.Current;
+            _sseClient.OnNewMessage += message =>
+            {
+                _ui.Post(_ =>
+                {
+                    _chatsManager.ReceiveMessage(message);
+                }, null);
+            };
+            _sseClient.OnNewChat += chat =>
+            {
+                _ui.Post(_ =>
+                {
+                    _chatsManager.CreateChat(chat);
+                }, null);
+            };
 
             _emailSearchController = new EmailSearchController(new EmailSearchView(emailSearchTextBox), _restClient, _chatsManager);
 
